@@ -22,16 +22,16 @@ public class MainActivity extends AppCompatActivity {
             button_chat.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent myIntent = new Intent(MainActivity.this, ChatActivity.class);
-                    MainActivity.this.startActivity(myIntent);
-                    //Тут код чата
+                    Intent myIntent_chat = new Intent(MainActivity.this, ChatActivity.class);
+                    MainActivity.this.startActivity(myIntent_chat);
                 }
             });
             button_map.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     setContentView(R.layout.map_activity);
-                    //Тут код карты
+                    Intent myIntent_map = new Intent(MainActivity.this, MapActivity.class);
+                    MainActivity.this.startActivity(myIntent_map);
                 }
             });
             button_about.setOnClickListener(new View.OnClickListener() {
