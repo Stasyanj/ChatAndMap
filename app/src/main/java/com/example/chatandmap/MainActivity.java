@@ -13,40 +13,44 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        if (savedInstanceState == null) {
+            super.onCreate(savedInstanceState);
+        }
+    }
+    protected  void onStart() {
+        super.onStart();
         setContentView(R.layout.activity_main);
         Button button_chat = (Button) findViewById(R.id.button);
         Button button_map = (Button) findViewById(R.id.button2);
         Button button_about = (Button) findViewById(R.id.button3);
         Button button_exit = (Button) findViewById(R.id.button4);
-            button_chat.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent myIntent_chat = new Intent(MainActivity.this, ChatActivity.class);
-                    MainActivity.this.startActivity(myIntent_chat);
-                }
-            });
-            button_map.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    setContentView(R.layout.map_activity);
-                    Intent myIntent_map = new Intent(MainActivity.this, MapActivity.class);
-                    MainActivity.this.startActivity(myIntent_map);
-                }
-            });
-            button_about.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    setContentView(R.layout.about);
-                    //Тут код описания
-                }
-            });
-            button_exit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    finishAffinity();
-                    System.exit(0);
-                }
-            });
+        Intent myIntent_chat = new Intent(MainActivity.this, ChatActivity.class);
+        Intent myIntent_map = new Intent(MainActivity.this, MapActivity.class);
+        button_chat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity.this.startActivity(myIntent_chat);
+            }
+        });
+        button_map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity.this.startActivity(myIntent_map);
+            }
+        });
+        button_about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setContentView(R.layout.about);
+                //Тут код описания
+            }
+        });
+        button_exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finishAffinity();
+                System.exit(0);
+            }
+        });
     }
 }
