@@ -12,7 +12,7 @@ public class MapActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.map_activity);
-        ImageButton exit_map_button = (ImageButton) findViewById(R.id.imageButton);
+        ImageButton exit_map_button = (ImageButton) findViewById(R.id.imageButton4);
         Intent myIntent = new Intent(MapActivity.this, MainActivity.class);
         //Тут код карты
         exit_map_button.setOnClickListener(new View.OnClickListener() {

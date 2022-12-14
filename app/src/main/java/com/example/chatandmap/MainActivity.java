@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         Button button_exit = (Button) findViewById(R.id.button4);
         Intent myIntent_chat = new Intent(MainActivity.this, ChatActivity.class);
         Intent myIntent_map = new Intent(MainActivity.this, MapActivity.class);
+        Intent myIntent_about = new Intent(MainActivity.this, AboutActivity.class);
         button_chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -41,8 +42,7 @@ public class MainActivity extends AppCompatActivity {
         button_about.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setContentView(R.layout.about);
-                //Тут код описания
+                MainActivity.this.startActivity(myIntent_about);
             }
         });
         button_exit.setOnClickListener(new View.OnClickListener() {
