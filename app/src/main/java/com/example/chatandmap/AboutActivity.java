@@ -27,4 +27,8 @@ public class AboutActivity extends AppCompatActivity {
             }
         });
     }
+    public void onBackPressed(){
+        Intent exit_intent = new Intent(AboutActivity.this, MainActivity.class);
+        AboutActivity.this.startActivity(exit_intent);
+    }
 }

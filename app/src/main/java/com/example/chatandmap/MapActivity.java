@@ -21,6 +21,9 @@ public class MapActivity extends AppCompatActivity {
                 MapActivity.this.startActivity(myIntent);
             }
         });
-
+    }
+    public void onBackPressed(){
+        Intent exit_intent = new Intent(MapActivity.this, MainActivity.class);
+        MapActivity.this.startActivity(exit_intent);
     }
 }

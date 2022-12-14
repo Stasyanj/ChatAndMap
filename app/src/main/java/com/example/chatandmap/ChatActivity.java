@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ChatActivity extends AppCompatActivity {
@@ -43,4 +45,9 @@ public class ChatActivity extends AppCompatActivity {
         text = text +"\n";
         txt_view.append(text);
     }
+    public void onBackPressed(){
+        Intent exit_intent = new Intent(ChatActivity.this, MainActivity.class);
+        ChatActivity.this.startActivity(exit_intent);
+    }
+
 }
