@@ -78,6 +78,7 @@ public class ConnectionClient extends AppCompatActivity {
             return serverWord;
     }
     //приветики)) как жизнь?
+    //Норм, ты как?
     protected void finalize() throws Throwable{
         super.finalize();
         closeConnection();
