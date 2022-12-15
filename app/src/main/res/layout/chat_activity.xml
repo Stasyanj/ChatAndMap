@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent"></androidx.appcompat.widget.Toolbar>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/Reveive_Text"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="32dp"
@@ -83,7 +83,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/Reveive_Text"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/send_button" />
 

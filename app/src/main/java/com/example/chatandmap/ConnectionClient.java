@@ -5,7 +5,11 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
@@ -13,6 +17,9 @@ public class ConnectionClient extends AppCompatActivity {
     private Socket clientSocket = null;
     private String mHost = null;
     private int mPort = 0;
+    private static BufferedReader reader;
+    private static BufferedReader in;
+    private static BufferedWriter out;
 
     public static final String LOG_TAG = "SOCKET";
 
@@ -22,7 +29,7 @@ public class ConnectionClient extends AppCompatActivity {
         this.mHost = host;
         this.mPort = port;
     }
-    public void openConntection() throws Exception {
+    public void openConnection() throws Exception {
         closeConnection();
         try {
             clientSocket = new Socket(mHost, mPort);
@@ -43,30 +50,33 @@ public class ConnectionClient extends AppCompatActivity {
         clientSocket = null;
     }
     public void sendData(String data) throws Exception{
-        int strlen = 0;
+        reader = new BufferedReader(new InputStreamReader(System.in));
+        out = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
         if (clientSocket == null || clientSocket.isClosed()){
             throw new Exception("Ошибка отправки данных." + "Сокет не создан или закрыт");
         }
         try {
-            strlen = data.length();
-            clientSocket.getOutputStream().write(data.getBytes(StandardCharsets.US_ASCII), 0,strlen);
-            clientSocket.getOutputStream().flush();
+            out.write(data);
+            out.flush();
         } catch (IOException e){
             throw new Exception("Ошибка отправки данных: " + e.getMessage());
         }
     }
-    public void receiveData() throws Exception{
+    public String receiveData() throws Exception{
         byte[] data = "".getBytes(StandardCharsets.UTF_8);
+        String serverWord;
+        BufferedReader in = null;
+        in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             if (clientSocket == null || clientSocket.isClosed()) {
                 throw new Exception("Ошибка получения данных." + "Сокет не создан или закрыт");
             }
             try {
-                clientSocket.getInputStream().read(data);
+                 serverWord = in.readLine();
+                //clientSocket.getInputStream().read(data);
             } catch (IOException e) {
                 throw new Exception("Ошибка отправки данных: " + e.getMessage());
             }
-            TextView txt_View = (TextView) findViewById(R.id.textView);
-            txt_View.append(data.toString());
+            return serverWord;
     }
     protected void finalize() throws Throwable{
         super.finalize();

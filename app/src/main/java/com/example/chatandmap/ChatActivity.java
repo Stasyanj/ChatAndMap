@@ -1,28 +1,18 @@
 package com.example.chatandmap;
 
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.telecom.Connection;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.io.BufferedReader;
-import java.io.PrintWriter;
-import java.net.Socket;
-import java.io.*;
-import java.net.*;
-import java.nio.charset.StandardCharsets;
 
 public class ChatActivity extends AppCompatActivity {
     private ImageButton connect_button = null;
@@ -43,14 +33,9 @@ public class ChatActivity extends AppCompatActivity {
         ImageButton send_button = (ImageButton) findViewById(R.id.imageButton3);
         ImageButton connect_button = (ImageButton) findViewById(R.id.imageButton5);
         ImageButton exit_chat_button = (ImageButton) findViewById(R.id.imageButton2);
+        TextView txt_view = (TextView) findViewById(R.id.Reveive_Text);
         EditText Edit_text = (EditText) findViewById(R.id.editText);
         Intent myIntent = new Intent(ChatActivity.this, MainActivity.class);
-        send_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                send_text();
-            }
-        });
         connect_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,14 +78,6 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
     }
-    public void send_text(){
-        TextView txt_view = (TextView) findViewById(R.id.textView);
-        Edit_text.setMovementMethod(new ScrollingMovementMethod());
-        String text = Edit_text.getText().toString();
-        text = text +"\n";
-        txt_view.append(text);
-    }
-
     private void onOpenClick(){
         connect_button = (ImageButton) findViewById(R.id.imageButton5);
         mConnect = new ConnectionClient();
@@ -109,7 +86,7 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    mConnect.openConntection();
+                    mConnect.openConnection();
                     Log.d(LOG_TAG, "Соединение установлено");
                     connect_button.setImageResource(R.drawable.connect_sucsesfull);
                 } catch (Exception e){
@@ -130,7 +107,7 @@ public class ChatActivity extends AppCompatActivity {
                 public void run() {
                     try {
                         String text;
-                        text = Edit_text.getText().toString() + "\0";
+                        text = Edit_text.getText().toString() + "\n\0";
                         mConnect.sendData(text);
                     } catch (Exception e){
                         Log.e(LOG_TAG, e.getMessage());
@@ -140,6 +117,7 @@ public class ChatActivity extends AppCompatActivity {
         }
     }
     private void onReceive(){
+        TextView txt_view = (TextView) findViewById(R.id.Reveive_Text);
         if (mConnect == null){
             Log.d(LOG_TAG, "Соединение не установлено");
         }else {
@@ -148,7 +126,7 @@ public class ChatActivity extends AppCompatActivity {
                 @Override
                     public void run () {
                         try {
-                            mConnect.receiveData();
+                            txt_view.append(mConnect.receiveData());
                         } catch (Exception e) {
                             Log.e(LOG_TAG, e.getMessage());
                         }
