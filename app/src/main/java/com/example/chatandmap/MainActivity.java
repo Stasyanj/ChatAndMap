@@ -48,8 +48,6 @@ public class MainActivity extends AppCompatActivity {
         button_exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ConnectionClient close = null;
-                close.closeConnection();
                 finishAffinity();
                 System.exit(0);
             }

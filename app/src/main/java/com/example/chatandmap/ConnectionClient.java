@@ -72,12 +72,12 @@ public class ConnectionClient extends AppCompatActivity {
             }
             try {
                  serverWord = in.readLine();
-                //clientSocket.getInputStream().read(data);
             } catch (IOException e) {
                 throw new Exception("Ошибка отправки данных: " + e.getMessage());
             }
             return serverWord;
     }
+    //приветики)) как жизнь?
     protected void finalize() throws Throwable{
         super.finalize();
         closeConnection();

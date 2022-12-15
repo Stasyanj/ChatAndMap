@@ -36,6 +36,7 @@ public class ChatActivity extends AppCompatActivity {
         TextView txt_view = (TextView) findViewById(R.id.Reveive_Text);
         EditText Edit_text = (EditText) findViewById(R.id.editText);
         Intent myIntent = new Intent(ChatActivity.this, MainActivity.class);
+        txt_view.setMovementMethod(new ScrollingMovementMethod());
         connect_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,7 +68,17 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 onSendClick();
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e){
+                    Thread.currentThread().interrupt();
+                }
                 onReceive();
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e){
+                    Thread.currentThread().interrupt();
+                }
                 Edit_text.setText("");
             }
         });
@@ -126,7 +137,7 @@ public class ChatActivity extends AppCompatActivity {
                 @Override
                     public void run () {
                         try {
-                            txt_view.append(mConnect.receiveData());
+                            txt_view.append("\n" + mConnect.receiveData());
                         } catch (Exception e) {
                             Log.e(LOG_TAG, e.getMessage());
                         }
