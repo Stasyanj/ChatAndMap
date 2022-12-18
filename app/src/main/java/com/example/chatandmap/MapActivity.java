@@ -2,13 +2,9 @@ package com.example.chatandmap;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -22,9 +18,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.example.chatandmap.databinding.MapActivityBinding;
-import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
-import com.google.android.gms.maps.GoogleMap.OnMyLocationClickListener;
 import com.google.android.gms.location.*;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -32,7 +25,6 @@ import com.google.android.gms.tasks.Task;
 public class MapActivity extends AppCompatActivity{
     SupportMapFragment supportMapFragment;
     FusedLocationProviderClient client;
-
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -49,7 +41,6 @@ public class MapActivity extends AppCompatActivity{
         } else {
             ActivityCompat.requestPermissions(MapActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
         }
-        //Тут код карты
         exit_map_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,7 +48,6 @@ public class MapActivity extends AppCompatActivity{
             }
         });
     }
-
     private void getCurrentLocation() {
         Task<Location> task = client.getLastLocation();
         task.addOnSuccessListener(new OnSuccessListener<Location>() {
@@ -78,7 +68,6 @@ public class MapActivity extends AppCompatActivity{
             }
         });
     }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -88,7 +77,6 @@ public class MapActivity extends AppCompatActivity{
             }
         }
     }
-
     public void onBackPressed(){
         Intent exit_intent = new Intent(MapActivity.this, MainActivity.class);
         MapActivity.this.startActivity(exit_intent);
